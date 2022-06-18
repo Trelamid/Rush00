@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class RotateToCursor : MonoBehaviour
 {
+    Vector3 mousePos;
+    
     void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -16,12 +19,13 @@ public class RotateToCursor : MonoBehaviour
 
     void rotateToCursor()
     {
-        Vector3 mousePos = Input.mousePosition;
+        mousePos = Input.mousePosition;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
+        var position = transform.position;
         Vector2 direction = new Vector2(
-            mousePos.x - transform.position.x,
-            mousePos.y - transform.position.y
+            mousePos.x - position.x,
+            mousePos.y - position.y
         );
         transform.up = -direction;
     }
