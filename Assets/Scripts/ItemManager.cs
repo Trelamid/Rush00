@@ -12,23 +12,24 @@ public class ItemManager : MonoBehaviour
     {
         _weaponManager = FindObjectOfType<WeaponController>();
     }
-
+    
     private void OnTriggerStay2D(Collider2D other)
     {
+        Debug.Log(other.name);
         if (other.name == "Player")
         {
             other.GetComponent<WeaponController>().inTrigger = true;
-            if (Input.GetButton(KeyCode))
+            if (Input.GetKeyUp(KeyCode.E))
                 StartCoroutine("wait");
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.name == "Player")
             other.GetComponent<WeaponController>().inTrigger = false;
     }
-
+    
     IEnumerator wait()
     {
         if (_weaponManager.weaponType != "Null")
@@ -38,4 +39,3 @@ public class ItemManager : MonoBehaviour
         Destroy(gameObject);
     }
 }
- 
