@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 233762781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 407137405}
+        m_TargetAssemblyTypeName: ForScene, Assembly-CSharp
+        m_MethodName: NextScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &233762781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +269,7 @@ GameObject:
   - component: {fileID: 407137404}
   - component: {fileID: 407137403}
   - component: {fileID: 407137402}
+  - component: {fileID: 407137405}
   m_Layer: 5
   m_Name: AboutAvtors
   m_TagString: Untagged
@@ -328,7 +341,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 407137403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 407137405}
+        m_TargetAssemblyTypeName: ForScene, Assembly-CSharp
+        m_MethodName: OpenGit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &407137403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +392,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407137400}
   m_CullTransparentMesh: 1
+--- !u!114 &407137405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407137400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1a9afecc7d24f24fa5543abdc1c2630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1492,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1879886293}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 407137405}
+        m_TargetAssemblyTypeName: ForScene, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1879886293
 MonoBehaviour:
   m_ObjectHideFlags: 0
