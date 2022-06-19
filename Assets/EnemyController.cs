@@ -145,7 +145,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Debug.Log(raycastHit2D.collider.name);
+            // Debug.Log(raycastHit2D.collider.name);
             return;
         }
   
