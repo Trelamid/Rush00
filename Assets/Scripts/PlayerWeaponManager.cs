@@ -104,7 +104,15 @@ public class PlayerWeaponManager : MonoBehaviour
                     shoot = true;
                     _cor = StartCoroutine(shooot());
                 }
-                Instantiate(Resources.Load("Prefabs/" + weaponType + "_bullet"), spawn.transform.position, spawn.transform.rotation);
+
+                try
+                {
+                    Instantiate(Resources.Load("Prefabs/" + weaponType + "_bullet"), spawn.transform.position, spawn.transform.rotation);
+                }
+                catch (Exception e)
+                {
+                    
+                }
             }
         }
     }
