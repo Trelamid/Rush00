@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
 	private bool isOpen = false;
 	private Vector3 closePos;
 	private Coroutine cor;
+	public bool isDied = false;
 
 	private void Start()
 	{
@@ -53,5 +54,11 @@ public class Door : MonoBehaviour
 			transform.position = smoothPos;
 		}
 		isOpen = false;
+	}
+
+	public void Dead()
+	{
+		isDied = true;
+		enabled = false;
 	}
 }

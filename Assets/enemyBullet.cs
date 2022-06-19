@@ -6,6 +6,8 @@ using UnityEngine;
 public class enemyBullet : MonoBehaviour
 {
     private Vector2 dir;
+
+    public float speed;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class enemyBullet : MonoBehaviour
             Debug.Log("Player");
             // col.gameObject.GetComponent<>();
         }
-        else if(col.gameObject.tag != "Enemy")
+        if(col.gameObject.tag != "Enemy")
             Destroy(this.gameObject);
         // Debug.Log(col.gameObject);
     }
@@ -30,6 +32,6 @@ public class enemyBullet : MonoBehaviour
     void Update()
     {
         // transform.Translate(dir.normalized* Time.deltaTime * 5);
-        transform.position += transform.up * Time.deltaTime * 10;
+        transform.position += transform.up * Time.deltaTime * speed;
     }
 }
