@@ -5,12 +5,12 @@ public class ItemManager : MonoBehaviour
 {
     public Items item;
 
-    WeaponController _weaponManager;
+    PlayerWeaponManager _weaponManager;
     
     // Start is called before the first frame update
     void Start()
     {
-        _weaponManager = FindObjectOfType<WeaponController>();
+        _weaponManager = FindObjectOfType<PlayerWeaponManager>();
     }
     
     private void OnTriggerStay2D(Collider2D other)
@@ -18,24 +18,20 @@ public class ItemManager : MonoBehaviour
         Debug.Log(other.name);
         if (other.name == "Player")
         {
-            other.GetComponent<WeaponController>().inTrigger = true;
-            if (Input.GetKeyUp(KeyCode.E))
-                StartCoroutine("wait");
+            other.GetComponent<PlayerWeaponManager>().trigger = true;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (_weaponManager.weaponType != "Null")
+                    _weaponManager.DropWeapon(_weaponManager.weaponType);
+                _weaponManager.weaponType = item.weaponType.ToString();
+                Destroy(gameObject);
+            }
         }
     }
     
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.name == "Player")
-            other.GetComponent<WeaponController>().inTrigger = false;
+            other.GetComponent<PlayerWeaponManager>().trigger = false;
     }
-    
-    IEnumerator wait()
-    {
-        if (_weaponManager.weaponType != "Null")
-            _weaponManager.DropWeapon(_weaponManager.weaponType);
-        yield return new WaitForSeconds(0.05f);
-        _weaponManager.weaponType = item.weaponType.ToString();
-        Destroy(gameObject);
-    }
-}
+}  

@@ -6,7 +6,11 @@ public class Items
         Null,
         Uzi,
         Shotgun,
-        Saber
+        Saber,
+        RocketLauncher,
+        Magnum,
+        Cricket,
+        MachineGun
     }
 
     public WeaponType weaponType;

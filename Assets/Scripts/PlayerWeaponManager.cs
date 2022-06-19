@@ -2,19 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponController : MonoBehaviour
+public class PlayerWeaponManager : MonoBehaviour
 {
-    // public float speed = 10f;
-    public bool isUnlimited = false;
     public string weaponType;
-    public bool inTrigger = false;
+    public bool trigger = false;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         WeaponManager();
@@ -22,7 +14,7 @@ public class WeaponController : MonoBehaviour
     
     void WeaponManager()
     {
-        if (Input.GetMouseButtonDown(1) && !inTrigger)
+        if (Input.GetMouseButtonDown(1) && !trigger)
         {
             DropWeapon(weaponType);
         }
@@ -33,7 +25,7 @@ public class WeaponController : MonoBehaviour
         if (weaponType != "Null")
         {
             Instantiate(Resources.Load("Prefabs/" + weapon), transform.position, Quaternion.identity);
-            if (!inTrigger)
+            if (!trigger)
                 weaponType = "Null";
         }
         else
