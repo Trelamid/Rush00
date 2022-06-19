@@ -42,7 +42,7 @@ public class enemyBullet : MonoBehaviour
             col.gameObject.GetComponentInParent<RotatePlayer>().enabled = false;
             col.gameObject.GetComponentInParent<PlayerWeaponManager>().death = true;
         }
-        if(col.gameObject.tag != "Enemy"  && col.gameObject.tag != "Weapon" )
+        if(col.gameObject.tag != "Enemy"  && col.gameObject.tag != "Weapon" || col.gameObject.tag == "Door")
             Destroy(this.gameObject);
     }
 
