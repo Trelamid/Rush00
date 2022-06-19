@@ -149,13 +149,13 @@ public class EnemyController : MonoBehaviour
             return;
         }
   
-        if (!_attack && pos >= 0 && dist < _distVisionForward)
+        if (!_attack && pos < 0 && dist < _distVisionForward)
         {
             // Debug.Log("forward");
             // Debug.Log(pos);
             _attack = true;
         }
-        else if (!_attack && pos < 0 && dist < _distVisionBack)
+        else if (!_attack && pos >= 0 && dist < _distVisionBack)
         {
             // Debug.Log(pos);
             // Debug.Log("back");

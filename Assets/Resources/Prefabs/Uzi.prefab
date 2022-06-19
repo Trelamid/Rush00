@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7441566978242424884}
   m_Layer: 0
   m_Name: Uzi
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,9 +100,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.042146683, y: 0}
   serializedVersion: 2
-  m_Radius: 0.375
+  m_Radius: 0.468544
 --- !u!114 &6885785888858457893
 MonoBehaviour:
   m_ObjectHideFlags: 0

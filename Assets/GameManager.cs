@@ -6,27 +6,30 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private GameObject _player;
-    private CharacterController _characterController;
+    private PlayerWeaponManager _characterController;
     private float _time;
 
     public GameObject winImpact;
     public GameObject loseImpact;
+
+    private bool deathh;
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _characterController = _player.GetComponent<CharacterController>();
+        _characterController = _player.GetComponent<PlayerWeaponManager>();
     }
 
     void Update()
     {
-        // if (_characterController.death)
-        // {
-        //     Instantiate(loseImpact);
-        //     Debug.Log("You lose!");
-        //     // Invoke("GoMainMenu", 3);
-        // }
+        if (_characterController.death && !deathh)
+        {
+            deathh = true;
+            Instantiate(loseImpact);
+            Debug.Log("You lose!");
+            // Invoke("GoMainMenu", 3);
+        }
 
-        if (Time.time > _time)
+        if (Time.time > _time && !deathh)
         {
             _time = Time.time + 1;
             var enemy = GameObject.FindWithTag("Enemy");

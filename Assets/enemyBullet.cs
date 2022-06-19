@@ -18,14 +18,31 @@ public class enemyBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        Debug.Log(col.gameObject);
         if (col.gameObject.tag == "Player")
         {
             Debug.Log("Player");
-            // col.gameObject.GetComponent<>();
+            col.gameObject.GetComponentInParent<PlayerWeaponManager>().enabled = false;
+            col.gameObject.GetComponentInParent<PlayerMove>().enabled = false;
+            col.gameObject.GetComponentInParent<RotatePlayer>().enabled = false;
+            col.gameObject.GetComponentInParent<PlayerWeaponManager>().death = true;
         }
-        if(col.gameObject.tag != "Enemy")
+        if(col.gameObject.tag != "Enemy" && col.gameObject.tag != "Weapon" )
             Destroy(this.gameObject);
-        // Debug.Log(col.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            Debug.Log("Player");
+            col.gameObject.GetComponentInParent<PlayerWeaponManager>().enabled = false;
+            col.gameObject.GetComponentInParent<PlayerMove>().enabled = false;
+            col.gameObject.GetComponentInParent<RotatePlayer>().enabled = false;
+            col.gameObject.GetComponentInParent<PlayerWeaponManager>().death = true;
+        }
+        if(col.gameObject.tag != "Enemy"  && col.gameObject.tag != "Weapon" )
+            Destroy(this.gameObject);
     }
 
     // Update is called once per frame

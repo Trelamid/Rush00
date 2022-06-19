@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
             Debug.Log("Hit enemy");
             Destroy(gameObject);
         }
-        if(col.tag != "Player")
+        if(col.tag != "Player" && col.tag != "Weapon" )
         {
             Debug.Log("Other object");
             Destroy(gameObject);
