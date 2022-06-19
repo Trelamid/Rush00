@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public float _distVisionForward;
     public float _distVisionBack;
     public float _distVisionShoot = 5;
+    // public int damage;
+    // public float bulletSpeed;
 
     public float rateOfFire;
     public GameObject bullet;
