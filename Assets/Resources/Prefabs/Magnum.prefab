@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8497333912473922449}
   m_Layer: 0
   m_Name: Magnum
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,9 +100,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.015732765, y: 0}
   serializedVersion: 2
-  m_Radius: 0.375
+  m_Radius: 0.51449776
 --- !u!114 &2732262331917554026
 MonoBehaviour:
   m_ObjectHideFlags: 0

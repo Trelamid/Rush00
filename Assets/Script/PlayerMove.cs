@@ -26,8 +26,7 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        
     }
     
     void FixedUpdate()
@@ -36,7 +35,11 @@ public class PlayerMove : MonoBehaviour
         Debug.Log("fds");
         //_navMeshAgent.Move(movement * moveSpeed * Time.fixedDeltaTime);
         RotationCharacter();
-        transform.Translate(new Vector3(movement.x, 0, movement.y) * moveSpeed);
+        
+        movement.x = Input.GetAxis("Horizontal");
+        movement.y = Input.GetAxis("Vertical");
+        _navMeshAgent.Move(new Vector3(movement.x, movement.y, movement.y) * moveSpeed);
+        // transform.Translate(new Vector3(movement.x, 0, movement.y) * moveSpeed);
     }
     
     void RotationCharacter()

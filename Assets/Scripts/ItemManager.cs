@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,32 +8,47 @@ public class ItemManager : MonoBehaviour
     public Sprite weaponImg = null;
     PlayerWeaponManager _weaponManager;
 
+    private bool here;
+
     // Start is called before the first frame update
     void Start()
     {
         _weaponManager = FindObjectOfType<PlayerWeaponManager>();
     }
 
+    private void Update()
+    {
+        if (here && Input.GetKeyDown(KeyCode.E))
+        {
+            // other.GetComponentInParent<PlayerWeaponManager>().DropWeapon(_weaponManager.weaponType);
+            StartCoroutine("wait");
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log(other.name);
+        // Debug.Log(other.name);
         if (other.tag == "Player")
         {
+            here = true;
             var obj = other.GetComponentInParent<PlayerWeaponManager>();
             obj.trigger = true;
 
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                // other.GetComponentInParent<PlayerWeaponManager>().DropWeapon(_weaponManager.weaponType);
-                StartCoroutine("wait");
-            }
+            // if (Input.GetKeyDown(KeyCode.E))
+            // {
+            //     // other.GetComponentInParent<PlayerWeaponManager>().DropWeapon(_weaponManager.weaponType);
+            //     StartCoroutine("wait");
+            // }
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Player")
+        {
+            here = false;
             other.GetComponentInParent<PlayerWeaponManager>().trigger = false;
+        }
     }
 
     IEnumerator wait()

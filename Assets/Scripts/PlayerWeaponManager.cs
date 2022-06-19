@@ -10,6 +10,7 @@ public class PlayerWeaponManager : MonoBehaviour
     public bool trigger = false, shoot = true;
     public GameObject spawn;
     private float _rateOfFire;
+    public bool death;
 
     public float RateOfFire
     {
@@ -56,7 +57,7 @@ public class PlayerWeaponManager : MonoBehaviour
                 break;
         }
     }
-    
+
     void WeaponManager()
     {
         if (Input.GetMouseButtonDown(1) && !trigger)
