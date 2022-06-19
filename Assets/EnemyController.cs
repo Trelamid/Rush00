@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     public float _distVisionForward;
     public float _distVisionBack;
     public float _distVisionShoot = 5;
+
+    public GameObject find;
     // public int damage;
     // public float bulletSpeed;
 
@@ -27,7 +29,7 @@ public class EnemyController : MonoBehaviour
     public GameObject weapon;
     
     public bool patrul;
-    public Vector2[] points;
+    public GameObject[] points;
     private int destNow = 0;
     
     
@@ -36,7 +38,7 @@ public class EnemyController : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindWithTag("Player");
         if(patrul)
-            _navMeshAgent.SetDestination(points[destNow]);
+            _navMeshAgent.SetDestination(points[destNow].transform.position);
     }
 
     void Update()
@@ -51,20 +53,29 @@ public class EnemyController : MonoBehaviour
 
     void Patrul()
     {
-        if ((points[destNow] - (Vector2) transform.position).magnitude < 1)
+        if (((Vector2)points[destNow].transform.position - (Vector2) transform.position).magnitude < 1)
         {
-            if (destNow < points.Length)
+            if (destNow < points.Length - 1)
                 destNow++;
             else
                 destNow = 0;
 
-            _navMeshAgent.SetDestination(points[destNow]);
+            _navMeshAgent.SetDestination(points[destNow].transform.position);
         }
     }
     
     void AttackAndMove()
     {
-        _navMeshAgent.SetDestination(_player.transform.position - (_player.transform.position - transform.position).normalized * 1);
+        find.SetActive(true);
+        if (_type != type.turell)
+            _navMeshAgent.SetDestination(_player.transform.position -
+                                         (_player.transform.position - transform.position).normalized * 1);
+        else
+        {
+            var auf = _player.transform.position - weapon.transform.position;
+            float earler = Mathf.Atan2(auf.y, auf.x) * Mathf.Rad2Deg;
+            weapon.transform.rotation = Quaternion.Euler(0,0, earler + -90);
+        }
 
         if (Time.time > _time)
         {
@@ -76,14 +87,21 @@ public class EnemyController : MonoBehaviour
                 Bullet.transform.rotation = new Quaternion(0, 0,
                     transform.rotation.z, transform.rotation.w);
             }
+            else if(_type == type.turell)
+            {
+                var Bullet = Instantiate(bullet, weapon.transform.position,
+                    Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
+                Bullet.transform.rotation = new Quaternion(0, 0,
+                    weapon.transform.rotation.z, weapon.transform.rotation.w);
+            }
             else if (_type == type.robot)
             {
-                var Bullet1 = Instantiate(bullet, weapon.transform.position + -transform.right,
+                var Bullet1 = Instantiate(bullet, weapon.transform.position + -transform.right*0.5f,
                     Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
                 Bullet1.transform.rotation = new Quaternion(0, 0,
                     transform.rotation.z, transform.rotation.w);
                 
-                var Bullet2 = Instantiate(bullet, weapon.transform.position +transform.right,
+                var Bullet2 = Instantiate(bullet, weapon.transform.position +transform.right*0.5f,
                     Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
                 Bullet2.transform.rotation = new Quaternion(0, 0,
                     transform.rotation.z, transform.rotation.w);
