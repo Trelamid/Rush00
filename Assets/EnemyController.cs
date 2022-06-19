@@ -34,11 +34,14 @@ public class EnemyController : MonoBehaviour
 
     public AudioSource _audioShot;
     public GameObject _audioDie;
+
+    private PlayerWeaponManager playerCon;
     
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindWithTag("Player");
+        playerCon = _player.GetComponentInParent<PlayerWeaponManager>();
         if(patrul)
             _navMeshAgent.SetDestination(points[destNow].transform.position);
     }
@@ -127,10 +130,10 @@ public class EnemyController : MonoBehaviour
         Vector2 playerPos = _player.transform.position;
         float dist = (playerPos - enemyPos).magnitude;
         
-        // if (CharacterController.shoot && !_attack && dist < _distVisionShoot)
-        // {
-        //     _attack = true;
-        // }
+        if (playerCon.shoot && !_attack && dist < _distVisionShoot)
+        {
+            _attack = true;
+        }
         
         float pos = Quaternion.LookRotation(_player.transform.position - transform.position).z;
 
