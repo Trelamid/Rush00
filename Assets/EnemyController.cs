@@ -31,7 +31,9 @@ public class EnemyController : MonoBehaviour
     public bool patrul;
     public GameObject[] points;
     private int destNow = 0;
-    
+
+    public AudioSource _audioShot;
+    public GameObject _audioDie;
     
     void Start()
     {
@@ -51,6 +53,12 @@ public class EnemyController : MonoBehaviour
         CheckVision();
     }
 
+    public void Death()
+    {
+        Instantiate(_audioDie);
+        Destroy(gameObject);
+    }
+    
     void Patrul()
     {
         if (((Vector2)points[destNow].transform.position - (Vector2) transform.position).magnitude < 1)
@@ -86,6 +94,7 @@ public class EnemyController : MonoBehaviour
                     Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
                 Bullet.transform.rotation = new Quaternion(0, 0,
                     transform.rotation.z, transform.rotation.w);
+                _audioShot.Play();
             }
             else if(_type == type.turell)
             {
@@ -93,6 +102,7 @@ public class EnemyController : MonoBehaviour
                     Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
                 Bullet.transform.rotation = new Quaternion(0, 0,
                     weapon.transform.rotation.z, weapon.transform.rotation.w);
+                _audioShot.Play();
             }
             else if (_type == type.robot)
             {
@@ -100,7 +110,9 @@ public class EnemyController : MonoBehaviour
                     Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
                 Bullet1.transform.rotation = new Quaternion(0, 0,
                     transform.rotation.z, transform.rotation.w);
-                
+                // Debug.Log("a");
+                _audioShot.Play();
+
                 var Bullet2 = Instantiate(bullet, weapon.transform.position +transform.right*0.5f,
                     Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
                 Bullet2.transform.rotation = new Quaternion(0, 0,
@@ -137,13 +149,13 @@ public class EnemyController : MonoBehaviour
             return;
         }
   
-        if (!_attack && pos < 0 && dist < _distVisionForward)
+        if (!_attack && pos >= 0 && dist < _distVisionForward)
         {
             // Debug.Log("forward");
             // Debug.Log(pos);
             _attack = true;
         }
-        else if (!_attack && pos >= 0 && dist < _distVisionBack)
+        else if (!_attack && pos < 0 && dist < _distVisionBack)
         {
             // Debug.Log(pos);
             // Debug.Log("back");
