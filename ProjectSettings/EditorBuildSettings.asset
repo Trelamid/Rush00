@@ -9,13 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 190ece881652726408429a6d3c1dda39
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Scenes/lvlT.unity
-=======
-    path: Assets/Scenes/Kirill.unity
+    path: Assets/Scenes/lvlb.unity
     guid: e5965965444af69438be53e8fef8a709
   - enabled: 1
-    path: Assets/Scenes/Timur.unity
->>>>>>> 24590bfa353c10841a315fb159cf97ef0babdcff
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/asdasd.unity
+    guid: fe71c44eb61fd3c449a0086d6020c189
+  - enabled: 1
+    path: Assets/Scenes/lvlK.unity
+    guid: d3f68687a74325a42a123050663b730a
   m_configObjects: {}
