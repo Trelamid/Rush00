@@ -5,6 +5,12 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public enum type
+    {
+        simple, robot, turell
+    }
+
+    public type _type;
     private NavMeshAgent _navMeshAgent;
     private GameObject _player;
     private bool _attack;
@@ -20,21 +26,42 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;
     public GameObject weapon;
     
+    public bool patrul;
+    public Vector2[] points;
+    private int destNow = 0;
+    
     
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _player = GameObject.FindWithTag("Player");
+        if(patrul)
+            _navMeshAgent.SetDestination(points[destNow]);
     }
 
     void Update()
     {
         if (_attack)
             AttackAndMove();
+        else if(patrul)
+            Patrul();
         
         CheckVision();
     }
 
+    void Patrul()
+    {
+        if ((points[destNow] - (Vector2) transform.position).magnitude < 1)
+        {
+            if (destNow < points.Length)
+                destNow++;
+            else
+                destNow = 0;
+
+            _navMeshAgent.SetDestination(points[destNow]);
+        }
+    }
+    
     void AttackAndMove()
     {
         _navMeshAgent.SetDestination(_player.transform.position - (_player.transform.position - transform.position).normalized * 1);
@@ -42,10 +69,25 @@ public class EnemyController : MonoBehaviour
         if (Time.time > _time)
         {
             _time = Time.time + rateOfFire;
-            var Bullet = Instantiate(bullet, weapon.transform.position, Quaternion.LookRotation((Vector2)_player.transform.position - (Vector2)transform.position));
-            // Bullet.transform.position = Vector3.zero;
-            Bullet.transform.rotation = new Quaternion(0, 0,
-                transform.rotation.z, transform.rotation.w);
+            if (_type == type.simple)
+            {
+                var Bullet = Instantiate(bullet, weapon.transform.position,
+                    Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
+                Bullet.transform.rotation = new Quaternion(0, 0,
+                    transform.rotation.z, transform.rotation.w);
+            }
+            else if (_type == type.robot)
+            {
+                var Bullet1 = Instantiate(bullet, weapon.transform.position + -transform.right,
+                    Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
+                Bullet1.transform.rotation = new Quaternion(0, 0,
+                    transform.rotation.z, transform.rotation.w);
+                
+                var Bullet2 = Instantiate(bullet, weapon.transform.position +transform.right,
+                    Quaternion.LookRotation((Vector2) _player.transform.position - (Vector2) transform.position));
+                Bullet2.transform.rotation = new Quaternion(0, 0,
+                    transform.rotation.z, transform.rotation.w);
+            }
         }
     }
 
