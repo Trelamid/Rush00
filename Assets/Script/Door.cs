@@ -10,6 +10,7 @@ public class Door : MonoBehaviour
 	private Vector3 closePos;
 	private Coroutine cor;
 	public bool isDied = false;
+	private bool kill;
 
 	private void Start()
 	{
@@ -21,13 +22,58 @@ public class Door : MonoBehaviour
 		if (col.gameObject.tag is "Player" or "Enemy" && transform.position == closePos)
 		{
 			isOpen = true;
+			kill = true;
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D col)
 	{
+		if (col.gameObject.tag is "Player" or "Enemy")
+		{
+			if (cor != null) StopCoroutine(cor);
+		}
 		if (col.gameObject.tag == "Player" && transform.position == closePos)
+		{
 			isOpen = true;
+			kill = true;
+		}
+	}
+	private void OnTriggerStay2D(Collider2D col)
+	{
+		if (col.gameObject.tag is "Player" or "Enemy")
+		{
+			if (cor != null) StopCoroutine(cor);
+
+		}
+		if (col.gameObject.tag is "Player" or "Enemy" && transform.position == closePos)
+		{
+			if (cor != null) StopCoroutine(cor);
+			isOpen = true;
+			kill = true;
+		}
+		else
+		{
+			kill = false;
+		}
+	}
+
+	private void OnCollisionStay2D(Collision2D col)
+	{
+		if (col.gameObject.tag is "Player" or "Enemy")
+		{
+			if (cor != null) StopCoroutine(cor);
+
+		}
+		if (col.gameObject.tag == "Player" && transform.position == closePos)
+		{
+			if (cor != null) StopCoroutine(cor);
+			isOpen = true;
+			kill = true;
+		}
+		else
+		{
+			kill = false;
+		}
 	}
 
 	private void FixedUpdate()
@@ -38,10 +84,10 @@ public class Door : MonoBehaviour
 		transform.position = smoothPos;
 		if (transform.position == posTo)
 		{
-			Debug.Log("Lol");
+			// Debug.Log("Lol");
 			isOpen = false;
-			if (cor != null) StopCoroutine(cor);
-			cor  = StartCoroutine(CloseDoor());
+			// if (cor != null) StopCoroutine(cor);
+			// cor  = StartCoroutine(CloseDoor());
 		}
 	}
 
@@ -50,6 +96,8 @@ public class Door : MonoBehaviour
 		while (transform.position != closePos)
 		{
 			yield return new WaitForFixedUpdate();
+			if(kill)
+				yield break;
 			Vector3 smoothPos = Vector3.Lerp(transform.position, closePos, 0.1f);
 			transform.position = smoothPos;
 		}
