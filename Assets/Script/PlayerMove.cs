@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate()
     {
         _navMeshAgent.Move(movement * moveSpeed * Time.fixedDeltaTime);
-        Debug.Log("fds");
+        // Debug.Log("fds");
         //_navMeshAgent.Move(movement * moveSpeed * Time.fixedDeltaTime);
         RotationCharacter();
     }
