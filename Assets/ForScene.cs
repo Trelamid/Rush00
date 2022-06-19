@@ -36,4 +36,12 @@ public class ForScene : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void OpenGit()
+    {
+        Application.OpenURL("https://github.com/Trelamid");
+        Application.OpenURL("https://github.com/aperop");
+        Application.OpenURL("https://github.com/razdva0");
+        Application.OpenURL("https://github.com/vollk88");
+    }
 }
