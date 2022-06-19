@@ -9,6 +9,7 @@ public class ItemManager : MonoBehaviour
     PlayerWeaponManager _weaponManager;
 
     private bool here;
+    public AudioSource _sound;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class ItemManager : MonoBehaviour
     {
         if (here && Input.GetKeyDown(KeyCode.E))
         {
+            _sound.Play();
             // other.GetComponentInParent<PlayerWeaponManager>().DropWeapon(_weaponManager.weaponType);
             StartCoroutine("wait");
         }
